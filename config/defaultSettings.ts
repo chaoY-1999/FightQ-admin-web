@@ -12,9 +12,9 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: 'FightQ',
   pwa: false,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: 'https://github.com/chaoY-1999/FightQ-admin-web/blob/eada5caaff18a23f7022ae5b6098aa11211e4453/public/logo.svg',
   iconfontUrl: '',
 };
 

@@ -1,1 +1,1 @@
-export const SYSTEM_LOGO = "/public/fight.svg"
+export const SYSTEM_LOGO = "/public/logo.svg"

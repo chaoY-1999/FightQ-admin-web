@@ -15,7 +15,8 @@ export default defineConfig({
   },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
-    locale: true,
+    title: 'FightQ',
+    locale: false,
     siderWidth: 208,
     ...defaultSettings,
   },
