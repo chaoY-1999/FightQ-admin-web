@@ -1,13 +1,12 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { PageLoading, SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
-import { history, Link } from 'umi';
+import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
-import type {RequestConfig} from '@@/plugin-request/request';
+import type { RequestConfig } from '@@/plugin-request/request';
 
 export interface InitialState {
   settings?: Partial<LayoutSettings>;
@@ -15,9 +14,10 @@ export interface InitialState {
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }
-const isDev = process.env.NODE_ENV === 'development';
+// const _isDev = process.env.NODE_ENV === 'development';
+alert(process.env.NODE_ENV);
 const loginPath = '/user/login';
-const NO_NEED_LOGIN_WHITE_LIST =  ['/user/login', '/user/register']
+const NO_NEED_LOGIN_WHITE_LIST = ['/user/login', '/user/register'];
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
   loading: <PageLoading />,
@@ -34,11 +34,10 @@ export const request: RequestConfig = {
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<InitialState> {
-
   const fetchUserInfo = async () => {
     try {
-      const user = await queryCurrentUser();
-      return user;
+      const data = await queryCurrentUser();
+      return data;
     } catch (error) {
       history.push(loginPath);
     }
@@ -51,16 +50,16 @@ export async function getInitialState(): Promise<InitialState> {
       fetchUserInfo,
       currentUser,
       settings: defaultSettings,
-    };
+    } as InitialState;
   }
   return {
     fetchUserInfo,
     settings: defaultSettings,
-  };
+  } as InitialState;
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
-export const layout: RunTimeLayoutConfig = ({ initialState , setInitialState }) => {
+export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
     // 常用属性
     title: 'FightQ',
@@ -73,30 +72,30 @@ export const layout: RunTimeLayoutConfig = ({ initialState , setInitialState }) 
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
-      if(!NO_NEED_LOGIN_WHITE_LIST.includes(location.pathname)) {
+      if (!NO_NEED_LOGIN_WHITE_LIST.includes(location.pathname)) {
         // 如果没有登录，重定向到 login
         if (!initialState?.currentUser && location.pathname !== loginPath) {
           history.push(loginPath);
         }
       }
     },
-    links: isDev
-      ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-          <Link to="/~docs" key="docs">
-            <BookOutlined />
-            <span>业务组件文档</span>
-          </Link>,
-        ]
-      : [],
+    // links: isDev
+    //   ? [
+    //       <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+    //         <LinkOutlined />
+    //         <span>OpenAPI 文档</span>
+    //       </Link>,
+    //       <Link to="/~docs" key="docs">
+    //         <BookOutlined />
+    //         <span>业务组件文档</span>
+    //       </Link>,
+    //     ]
+    //   : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
-    childrenRender: (children: any, props: { location: { pathname: string | string[]; }; }) => {
+    childrenRender: (children: any, props: { location: { pathname: string | string[] } }) => {
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
@@ -120,4 +119,3 @@ export const layout: RunTimeLayoutConfig = ({ initialState , setInitialState }) 
     ...initialState?.settings,
   };
 };
-

@@ -6,52 +6,47 @@ export default [
       {
         name: 'login',
         path: '/user/login',
-        component: './user/Login'
+        component: './user/Login',
       },
       {
         name: 'register',
         path: '/user/register',
-        component: './user/Register'
+        component: './user/Register',
       },
       {
-        component: './404'
-      }
-    ]
+        component: './404',
+      },
+    ],
   },
   {
     path: '/welcome',
-    name: 'welcome',
+    name: '首页',
     icon: 'smile',
-    component: './Welcome'
+    component: './Welcome',
   },
   {
     path: '/admin',
-    name: 'admin',
+    name: '系统管理',
     icon: 'crown',
     access: 'canAdmin',
+    component: './Admin',
     routes: [
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
+        path: '/admin/user-management',
+        name: '用户管理',
         icon: 'smile',
-        component: './Welcome'
+        component: './Admin/UserManagement',
       },
       {
-        component: './404'
-      }
-    ]
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList'
+        component: './404',
+      },
+    ],
   },
   {
     path: '/',
-    redirect: '/welcome'
+    redirect: '/welcome',
   },
   {
-    component: './404'
-  }
+    component: './404',
+  },
 ];

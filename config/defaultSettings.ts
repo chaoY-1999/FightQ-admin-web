@@ -14,7 +14,7 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: 'FightQ',
   pwa: false,
-  logo: 'https://github.com/chaoY-1999/FightQ-admin-web/blob/eada5caaff18a23f7022ae5b6098aa11211e4453/public/logo.svg',
+  logo: 'https://logotyp.us/file/fighting-saints.svg',
   iconfontUrl: '',
 };
 

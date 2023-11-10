@@ -2,6 +2,16 @@
 /* eslint-disable */
 
 declare namespace API {
+  /**
+   * 通用返回类
+   */
+  type BaseResponse<T> = {
+    code: number;
+    data: T;
+    message: string;
+    description: string;
+  };
+
   type CurrentUser = {
     /** 此系统 custom currentUser */
     id: number;
@@ -42,8 +52,6 @@ declare namespace API {
     type?: string;
     currentAuthority?: string;
   };
-
-  type RegisterResult = number
 
   type PageParams = {
     current?: number;
